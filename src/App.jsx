@@ -40,7 +40,7 @@ function App() {
 
 	return (
 		<>
-			<div className="grid grid-cols-2">
+			<div className="flex h-screen">
 				<Sidebar projects={projects} />
 				{selectedProject ? (
 					<DetailProject
