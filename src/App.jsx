@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import FormAddProject from "./components/FormAddProject";
 import DetailProject from "./components/DetailProject";
+import NoProjectSelected from "./components/NoProjectSelected";
 
 function App() {
 	const [selectedProject, setSelectedProject] = useState(null);
@@ -47,7 +48,7 @@ function App() {
 						project={detailProject.find((p) => p.id === selectedProject)}
 					/>
 				) : (
-					<FormAddProject onClick={handleClick} />
+					<NoProjectSelected />
 				)}
 			</div>
 		</>
