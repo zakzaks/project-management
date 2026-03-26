@@ -1,36 +1,32 @@
 import { useState } from "react";
 import Sidebar from "./components/Sidebar";
-import FormAddProject from "./components/FormAddProject";
+import AddProject from "./components/AddProject";
 import DetailProject from "./components/DetailProject";
 import NoProjectSelected from "./components/NoProjectSelected";
 
 function App() {
-	const [selectedProject, setSelectedProject] = useState(null);
-	const [projects, setProjects] = useState([
-		{ id: 1, name: "Project Alpha" },
-		{ id: 2, name: "Project Beta" },
-		{ id: 3, name: "Project Gamma" },
-	]);
-	const [detailProject, setDetailProject] = useState([
-		{
-			id: 1,
-			name: "Project Alpha",
-			description: "Description for Project Alpha",
-			dueDate: "2024-12-31",
-		},
-		{
-			id: 2,
-			name: "Project Beta",
-			description: "Description for Project Beta",
-			dueDate: "2024-12-31",
-		},
-		{
-			id: 3,
-			name: "Project Gamma",
-			description: "Description for Project Gamma",
-			dueDate: "2024-12-31",
-		},
-	]);
+	const [projectsState, setProjectsState] = useState({
+		selectedProject: undefined,
+		projects: [],
+	});
+
+	function handleStartAddProject() {
+		setProjectsState((prevState) => {
+			return {
+				...prevState,
+				selectedProject: null,
+			};
+		});
+	}
+
+	function handleCancelClick() {
+		setProjectsState((prevState) => {
+			return {
+				...prevState,
+				selectedProject: undefined,
+			};
+		});
+	}
 
 	function handleClick({ name, description, dueDate }) {
 		setProjects([
@@ -42,11 +38,9 @@ function App() {
 	return (
 		<>
 			<div className="flex h-screen">
-				<Sidebar projects={projects} />
-				{selectedProject ? (
-					<DetailProject
-						project={detailProject.find((p) => p.id === selectedProject)}
-					/>
+				<Sidebar onStartAddProject={handleStartAddProject} />
+				{projectsState.selectedProject === null ? (
+					<AddProject onCancelClick={handleCancelClick} />
 				) : (
 					<NoProjectSelected />
 				)}

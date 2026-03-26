@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
 
-export default function FormAddProject({ onClick }) {
+export default function AddProject({ onClick, onCancelClick }) {
 	const [projectName, setProjectName] = useState("");
 	const [projectDescription, setProjectDescription] = useState("");
 	const [dueDate, setDueDate] = useState("");
@@ -16,7 +16,7 @@ export default function FormAddProject({ onClick }) {
 	}
 
 	return (
-		<div className="w-full h-screen bg-slate-500 text-black p-4">
+		<div className="mt-24 text-center m-auto">
 			<h2 className="text-2xl font-bold mb-4">ADD NEW PROJECT</h2>
 			<div>
 				<Input
@@ -44,11 +44,7 @@ export default function FormAddProject({ onClick }) {
 				</button>
 				<button
 					className="text-black font-bold py-2 px-4 hover:text-gray-300"
-					onClick={() => {
-						setProjectName("");
-						setProjectDescription("");
-						setDueDate("");
-					}}
+					onClick={onCancelClick}
 				>
 					Cancel
 				</button>
