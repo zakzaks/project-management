@@ -1,44 +1,33 @@
-import { useState } from "react";
 import Input from "./Input";
+import { useRef } from "react";
 
-export default function AddProject({ onClick, onCancelClick }) {
-	const [projectName, setProjectName] = useState("");
-	const [projectDescription, setProjectDescription] = useState("");
-	const [dueDate, setDueDate] = useState("");
+export default function AddProject({ onCancelClick, onAdd }) {
+	const title = useRef();
+	const description = useRef();
+	const dueDate = useRef();
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		if (!projectName.trim()) return;
-		onClick({ name: projectName, description: projectDescription, dueDate });
-		setProjectName("");
-		setProjectDescription("");
-		setDueDate("");
+	function handleSaveClick() {
+		const enteredTitle = title.current.value;
+		const enteredDescription = description.current.value;
+		const enteredDueDate = dueDate.current.value;
+
+		onAdd({
+			title: enteredTitle,
+			description: enteredDescription,
+			dueDate: enteredDueDate,
+		});
 	}
 
 	return (
 		<div className="mt-3 mr-3 w-full">
 			<h2 className="text-2xl font-bold mb-4">ADD NEW PROJECT</h2>
 			<div>
-				<Input
-					label="Project Name"
-					value={projectName}
-					onChange={(e) => setProjectName(e.target.value)}
-				/>
-				<Input
-					label="Project Description"
-					textarea
-					value={projectDescription}
-					onChange={(e) => setProjectDescription(e.target.value)}
-				/>
-				<Input
-					label="Due Date"
-					type="date"
-					value={dueDate}
-					onChange={(e) => setDueDate(e.target.value)}
-				/>
+				<Input ref={title} label="Project Name" />
+				<Input ref={description} label="Project Description" textarea />
+				<Input ref={dueDate} label="Due Date" type="date" />
 				<button
+					onClick={handleSaveClick}
 					className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-					onClick={handleSubmit}
 				>
 					Add Project
 				</button>

@@ -28,17 +28,30 @@ function App() {
 		});
 	}
 
-	function handleClick({ name, description, dueDate }) {
-		setProjects([
-			...projects,
-			{ id: projects.length + 1, name, description, dueDate },
-		]);
+	function handleAddProject(projectData) {
+		const newProject = {
+			...projectData,
+			id: Math.random(),
+		};
+		setProjectsState((prevState) => {
+			return {
+				...prevState,
+				projects: [...prevState.projects, newProject],
+				selectedProject: newProject.id,
+			};
+		});
 	}
+	console.log(projectsState.projects);
 
 	let content;
 
 	projectsState.selectedProject === null
-		? (content = <AddProject onCancelClick={handleCancelClick} />)
+		? (content = (
+				<AddProject
+					onCancelClick={handleCancelClick}
+					onAdd={handleAddProject}
+				/>
+			))
 		: (content = (
 				<NoProjectSelected onStartAddProject={handleStartAddProject} />
 			));
