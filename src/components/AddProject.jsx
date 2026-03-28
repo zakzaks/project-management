@@ -16,7 +16,7 @@ export default function AddProject({ onClick, onCancelClick }) {
 	}
 
 	return (
-		<div className="mt-24 text-center m-auto">
+		<div className="mt-3 mr-3 w-full">
 			<h2 className="text-2xl font-bold mb-4">ADD NEW PROJECT</h2>
 			<div>
 				<Input

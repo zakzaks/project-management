@@ -5,9 +5,15 @@ export default function Input({ label, textarea, ...props }) {
 				{label}
 			</label>
 			{textarea ? (
-				<textarea className="w-full p-2 mb-4 text-black" {...props} />
+				<textarea
+					className="w-full p-2 mb-4 text-black border border-solid border-grey-700"
+					{...props}
+				/>
 			) : (
-				<input className="w-full p-2 mb-4 text-black" {...props} />
+				<input
+					className="w-full p-2 mb-4 text-black border border-solid border-black-700"
+					{...props}
+				/>
 			)}
 		</p>
 	);

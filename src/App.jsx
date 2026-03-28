@@ -35,15 +35,19 @@ function App() {
 		]);
 	}
 
+	let content;
+
+	projectsState.selectedProject === null
+		? (content = <AddProject onCancelClick={handleCancelClick} />)
+		: (content = (
+				<NoProjectSelected onStartAddProject={handleStartAddProject} />
+			));
+
 	return (
 		<>
-			<div className="flex h-screen">
+			<div className="flex gap-3 h-screen">
 				<Sidebar onStartAddProject={handleStartAddProject} />
-				{projectsState.selectedProject === null ? (
-					<AddProject onCancelClick={handleCancelClick} />
-				) : (
-					<NoProjectSelected />
-				)}
+				{content}
 			</div>
 		</>
 	);
