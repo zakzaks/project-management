@@ -37,11 +37,10 @@ function App() {
 			return {
 				...prevState,
 				projects: [...prevState.projects, newProject],
-				selectedProject: newProject.id,
+				selectedProject: undefined,
 			};
 		});
 	}
-	console.log(projectsState.projects);
 
 	let content;
 
@@ -59,7 +58,10 @@ function App() {
 	return (
 		<>
 			<div className="flex gap-3 h-screen">
-				<Sidebar onStartAddProject={handleStartAddProject} />
+				<Sidebar
+					projects={projectsState.projects}
+					onStartAddProject={handleStartAddProject}
+				/>
 				{content}
 			</div>
 		</>
