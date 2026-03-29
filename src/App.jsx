@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar";
 import AddProject from "./components/AddProject";
 import DetailProject from "./components/DetailProject";
 import NoProjectSelected from "./components/NoProjectSelected";
+import SelectedProject from "./components/SelectedProject";
 
 function App() {
 	const [projectsState, setProjectsState] = useState({
@@ -42,18 +43,27 @@ function App() {
 		});
 	}
 
-	let content;
+	function handleSelectProject(projectId) {
+		setProjectsState((prevState) => {
+			return {
+				...prevState,
+				selectedProject: projectId,
+			};
+		});
+	}
+	const selectedProject = projectsState.projects.find(
+		(project) => project.id === projectsState.selectedProject,
+	);
 
-	projectsState.selectedProject === null
-		? (content = (
-				<AddProject
-					onCancelClick={handleCancelClick}
-					onAdd={handleAddProject}
-				/>
-			))
-		: (content = (
-				<NoProjectSelected onStartAddProject={handleStartAddProject} />
-			));
+	let content = <SelectedProject project={selectedProject} />;
+
+	if (projectsState.selectedProject === null) {
+		content = (
+			<AddProject onCancelClick={handleCancelClick} onAdd={handleAddProject} />
+		);
+	} else if (projectsState.selectedProject === undefined) {
+		content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
+	}
 
 	return (
 		<>
@@ -61,6 +71,7 @@ function App() {
 				<Sidebar
 					projects={projectsState.projects}
 					onStartAddProject={handleStartAddProject}
+					onSelectProject={handleSelectProject}
 				/>
 				{content}
 			</div>
