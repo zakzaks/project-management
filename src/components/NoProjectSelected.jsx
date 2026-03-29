@@ -9,6 +9,9 @@ export default function NoProjectSelected({ onStartAddProject }) {
 				src={image}
 				alt="No projects selected"
 			/>
+			<h2 className="text-xl font-bold text-stone-500 my-4">
+				No Project Selected
+			</h2>
 			<p className="my-3">
 				Please select a project from the sidebar to view details.
 			</p>

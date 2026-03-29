@@ -32,9 +32,11 @@ export default function AddProject({ onCancelClick, onAdd }) {
 	return (
 		<>
 			<Modal ref={modal} buttonCaption="Close">
-				<h2>Invalid Input</h2>
-				<p>Ooops... looks like you forgot input valid values.</p>
-				<p>Please input the valid values.</p>
+				<h2 className="text-xl font-bold text-stone-700 my-4">Invalid Input</h2>
+				<p className="text-stone-600 mb-4">
+					Ooops... looks like you forgot input valid values.
+				</p>
+				<p className="text-stone-600 mb-4">Please input the valid values.</p>
 			</Modal>
 			<div className="mt-3 mr-3 w-full">
 				<h2 className="text-2xl font-bold mb-4">ADD NEW PROJECT</h2>
