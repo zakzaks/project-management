@@ -1,4 +1,12 @@
-export default function SelectedProject({ project }) {
+import Tasks from "./Tasks";
+
+export default function SelectedProject({
+	tasks,
+	project,
+	onDelete,
+	onAddTask,
+	onDeleteTask,
+}) {
 	const formattedDueDate = new Date(project.dueDate).toLocaleDateString();
 
 	return (
@@ -8,14 +16,19 @@ export default function SelectedProject({ project }) {
 					<h1 className="text-3xl font-bold text-stone-600 mb-2">
 						{project.title}
 					</h1>
-					<button className="text-stone-600 hover:text-stone-950"></button>
+					<button
+						onClick={onDelete}
+						className="text-stone-600 hover:text-stone-950"
+					>
+						Delete
+					</button>
 				</div>
 				<p className="mb-4 text-stone-400">{formattedDueDate}</p>
 				<p className="text-stone-600 whitespace-pre-wrap">
 					{project.description}
 				</p>
 			</header>
-			TASKS
+			<Tasks tasks={tasks} onAddTask={onAddTask} onDeleteTask={onDeleteTask} />
 		</div>
 	);
 }
